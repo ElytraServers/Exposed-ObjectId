@@ -1,3 +1,5 @@
+import groovy.lang.Closure
+
 plugins {
     kotlin("jvm") version "2.2.20"
 
@@ -6,10 +8,19 @@ plugins {
     `maven-publish`
     signing
     id("com.vanniktech.maven.publish") version "0.35.0"
+
+    id("com.palantir.git-version") version "4.2.0"
 }
 
 group = "cn.elytra"
-version = "1.0.0"
+
+val gitVersion: Closure<String> by extra
+try {
+    version = gitVersion()
+} catch (e: Exception) {
+    println("Failed to get version from git")
+    e.printStackTrace()
+}
 
 repositories {
     mavenCentral()
