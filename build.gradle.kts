@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.bson)
+    api(libs.bson)
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
 
