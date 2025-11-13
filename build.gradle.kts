@@ -51,7 +51,7 @@ mavenPublishing {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
 
-    coordinates("cn.elytra", "exposed-object-id", "${project.version}")
+    coordinates("cn.elytra", "exposed-object-id", "${project.version}".removePrefix("v"))
     pom {
         name = "Exposed ObjectId Extension"
         description = "Add ObjectId column type and entity types."
