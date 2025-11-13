@@ -1,12 +1,15 @@
 plugins {
     kotlin("jvm") version "2.2.20"
 
+    id("org.jetbrains.dokka") version "2.1.0"
+
     `maven-publish`
-    id("com.gradleup.nmcp.aggregation") version "1.2.0"
+    signing
+    id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
 group = "cn.elytra"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -33,20 +36,33 @@ kotlin {
     explicitApi()
 }
 
-fun prop(name: String): String? = findProperty(name) as? String ?: System.getenv(name)
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
+    signAllPublications()
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+    coordinates("cn.elytra", "exposed-object-id", "${project.version}")
+    pom {
+        name = "Exposed ObjectId Extension"
+        description = "Add ObjectId column type and entity types."
+        inceptionYear = "2025"
+        url = "https://github.com/ElytraServers/Exposed-ObjectId"
+        licenses {
+            license {
+                name = "Apache-2.0 License"
+                url = "https://github.com/ElytraServers/Exposed-ObjectId/blob/master/LICENSE"
+            }
         }
-    }
-}
-
-nmcpAggregation {
-    centralPortal {
-        username = prop("MAVEN_CENTRAL_USERNAME")
-        password = prop("MAVEN_CENTRAL_PASSWORD")
-        publishingType = "USER_MANAGED"
+        developers {
+            developer {
+                id = "taskeren"
+                name = "Taskeren"
+                url = "https://github.com/Taskeren"
+            }
+        }
+        scm {
+            url = "https://github.com/ElytraServers/Exposed-ObjectId"
+            connection = "scm:git:git://github.com/ElytraServers/Exposed-ObjectId.git"
+            developerConnection = "scm:git:ssh://github.com/ElytraServers/Exposed-ObjectId.git"
+        }
     }
 }
