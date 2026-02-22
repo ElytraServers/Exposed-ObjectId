@@ -1,6 +1,7 @@
 # Exposed Object Id
 
-![Maven Central](https://img.shields.io/maven-central/v/cn.elytra/exposed-object-id)
+[![Maven](https://badges.mvnrepository.com/badge/cn.elytra/exposed-object-id/badge.svg?label=Maven&selector=stable)](https://mvnrepository.com/artifact/cn.elytra/exposed-object-id)
+[![Maven](https://badges.mvnrepository.com/badge/cn.elytra/exposed-object-id/badge.svg?label=Maven&color=orange)](https://mvnrepository.com/artifact/cn.elytra/exposed-object-id)
 ![GitHub License](https://img.shields.io/github/license/ElytraServers/Exposed-ObjectId)
 
 An extension to [Exposed](https://github.com/JetBrains/Exposed) in supporting ObjectId as primary keys, for developers
