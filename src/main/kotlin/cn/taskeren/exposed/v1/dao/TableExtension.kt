@@ -1,6 +1,7 @@
 package cn.taskeren.exposed.v1.dao
 
 import org.bson.types.ObjectId
+import org.jetbrains.annotations.ApiStatus
 import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.Table
 
@@ -26,6 +27,24 @@ public fun Table.objectId(
     autoGenerate: Boolean = false,
 ): Column<ObjectId> =
     byteArray(name, length = 12)
+        .transform(wrap = ::byteArrayToObjectId, unwrap = ::objectIdToByteArray)
+        .apply { if (autoGenerate) clientDefault { ObjectId() } }
+
+/**
+ * Creates an [ObjectId] column, with the specified [name].
+ *
+ * @param byteArrayColumnAdder the function to add a ByteArray [Column] to the table. (e.g., [`Table.binary(String)`][Table.binary], `Table.binary(String, Int)`.)
+ * @since v1.0.2
+ */
+@ApiStatus.Experimental
+public fun Table.objectId(
+    name: String,
+    autoGenerate: Boolean = false,
+    byteArrayColumnAdder: Table.(name: String, length: Int) -> Column<ByteArray> = { name, length ->
+        this.byteArray(name, length)
+    },
+): Column<ObjectId> =
+    byteArrayColumnAdder(name, 12)
         .transform(wrap = ::byteArrayToObjectId, unwrap = ::objectIdToByteArray)
         .apply { if (autoGenerate) clientDefault { ObjectId() } }
 
