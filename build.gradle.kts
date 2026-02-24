@@ -9,7 +9,7 @@ plugins {
     signing
     id("com.vanniktech.maven.publish") version "0.36.0"
 
-    id("com.palantir.git-version") version "4.3.0"
+    id("com.palantir.git-version") version "5.0.0"
 }
 
 group = "cn.elytra"
