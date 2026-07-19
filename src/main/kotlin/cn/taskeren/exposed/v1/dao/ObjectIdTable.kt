@@ -19,6 +19,6 @@ public open class ObjectIdTable(
     columnName: String = "id",
 ) : IdTable<ObjectId>(name) {
     /** The identity column of this [ObjectIdTable], for storing ObjectId wrapped as [EntityID] instances. */
-    final override val id: Column<EntityID<ObjectId>> = objectId(columnName, autoGenerate = true).entityId()
+    final override val id: Column<EntityID<ObjectId>> = objectId(columnName).autoGenerate().entityId()
     final override val primaryKey: PrimaryKey = PrimaryKey(id)
 }
