@@ -11,9 +11,7 @@ who want to migrate their data from MongoDB to any other RDB.
 
 ```kotlin
 object MyTable : Table() {
-	// `autoGenerate` parameter is like calling autoGenerate() to UUID columns, where
-	// the value will be auto-generated on the client side just before insertion of a new row.
-	val foo = objectId("foo", autoGenerate = false)
+	val foo = objectId("foo")/*.autoGenerate()*/
 }
 ```
 
