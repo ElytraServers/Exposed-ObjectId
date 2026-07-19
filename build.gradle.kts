@@ -14,11 +14,12 @@ plugins {
 
 group = "cn.elytra"
 
-val gitVersion: Closure<String> by extra
+@Suppress("UNCHECKED_CAST")
+val gitVersion = extra.get("gitVersion") as Closure<String>
 try {
     version = gitVersion()
 } catch (e: Exception) {
-    println("Failed to get version from git")
+    logger.error("Failed to get version from git")
     e.printStackTrace()
 }
 
@@ -31,11 +32,20 @@ dependencies {
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
 
+    testImplementation(libs.exposed.jdbc)
+    testImplementation(libs.h2)
+    testImplementation(libs.slf4j.jdk14)
     testImplementation(kotlin("test"))
 }
 
 tasks.test {
     useJUnitPlatform()
+
+    // run tests in Java 25 for H2 (compiled by 11)
+    javaLauncher =
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(25))
+        }
 }
 
 java {
