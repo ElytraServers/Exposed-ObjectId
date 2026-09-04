@@ -7,4 +7,4 @@ exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "e
 exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 h2 = { module = "com.h2database:h2", version = "2.4.240" }
-slf4j-jdk14 = { module = "org.slf4j:slf4j-jdk14", version = "2.0.18" }
+slf4j-jdk14 = { module = "org.slf4j:slf4j-jdk14", version = "2.0.19" }
